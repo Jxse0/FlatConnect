@@ -63,7 +63,11 @@ const service = {
         },
       });
       await db.$disconnect();
-      return user;
+      if (user) {
+        return user.followers;
+      } else {
+        return null;
+      }
     } catch (error) {
       console.error("Error getting followers:", error);
       await db.$disconnect();
@@ -79,7 +83,11 @@ const service = {
         },
       });
       await db.$disconnect();
-      return user;
+      if (user) {
+        return user.following;
+      } else {
+        return null;
+      }
     } catch (error) {
       console.error("Error getting following:", error);
       await db.$disconnect();
