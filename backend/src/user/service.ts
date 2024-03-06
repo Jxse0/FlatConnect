@@ -67,13 +67,13 @@ const service = {
   },
   async delete(userid: number) {
     try {
-      const updatedUser = await db.user.deleteMany({
+      const deletedUser = await db.user.deleteMany({
         where: {
           id: userid,
         },
       });
       await db.$disconnect();
-      return updatedUser;
+      return deletedUser;
     } catch (error) {
       console.error("Error deleting user:", error);
       await db.$disconnect();

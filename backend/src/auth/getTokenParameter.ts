@@ -1,6 +1,6 @@
 import { Request } from "express";
 
-export default function returnUser(request: Request) {
+export default function getTokenParameter(request: Request) {
   const token = request.headers.authorization?.split(" ")[1];
 
   if (typeof token === "string") {

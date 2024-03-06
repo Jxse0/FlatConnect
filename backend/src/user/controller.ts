@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import service from "./service";
+import getTokenParameter from "../auth/getTokenParameter";
 
 const controller = {
   async create(request: Request, response: Response, next: NextFunction) {
@@ -26,8 +27,8 @@ const controller = {
   },
   async getOne(request: Request, response: Response) {
     try {
-      const user_token = request.body.userid;
-      const user = await service.getOne(user_token);
+      const user_token = getTokenParameter(request);
+      const user = await service.getOne(user_token.userid);
       response.json(user);
     } catch (error) {
       if (error instanceof Error) {
@@ -39,8 +40,8 @@ const controller = {
   },
   async update(request: Request, response: Response, next: NextFunction) {
     try {
-      const user_token = Number(request.query.userid);
-      const user = await service.update(user_token, request.body);
+      const user_token = getTokenParameter(request);
+      const user = await service.update(user_token.userid, request.body);
 
       response.status(201).send({
         status: "success",
@@ -56,8 +57,8 @@ const controller = {
   },
   async delete(request: Request, response: Response, next: NextFunction) {
     try {
-      const user_token = Number(request.query.userid);
-      const user = await service.delete(user_token);
+      const user_token = getTokenParameter(request);
+      const user = await service.delete(user_token.userid);
 
       response.status(201).send({
         status: "success",
