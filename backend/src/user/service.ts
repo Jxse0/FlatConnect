@@ -17,7 +17,6 @@ const service = {
       process.exit(1);
     }
   },
-
   async getOne(id: number): Promise<User | ErrorMessage> {
     try {
       const user = await db.user.findUnique({
@@ -80,7 +79,6 @@ const service = {
       throw error;
     }
   },
-
   async followUser(userid: number, username2follow: string) {
     try {
       const user = await db.user.update({
@@ -99,7 +97,6 @@ const service = {
       throw error;
     }
   },
-
   async unfollowUser(userid: number, username2unfollow: string) {
     try {
       const user = await db.user.findUnique({
