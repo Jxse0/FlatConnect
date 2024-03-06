@@ -1,11 +1,12 @@
 import express from "express";
 import controller from "./controller";
+import { authenticateToken } from "../auth/authenticateToken";
 
 const app = express.Router();
 
-app.get("/", controller.getOne);
+app.get("/", authenticateToken, controller.getOne);
 app.post("/", controller.create);
-app.put("/", controller.update);
-app.delete("/", controller.delete);
+app.put("/", authenticateToken, controller.update);
+app.delete("/", authenticateToken, controller.delete);
 
 export default app;
